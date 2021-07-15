@@ -14,6 +14,32 @@ defmodule Decto.Person do
   end
 end
 
+defmodule Decto.Branch do
+  use Ecto.Schema
+
+  @primary_key {:name, :string, autogenerate: :false} # Fix this object
+  schema "dolt_branches" do
+    field :hash, :string
+    field :latest_committer, :string
+    field :latest_committer_email, :string
+    field :latest_commit_date, :utc_datetime
+    field :latest_commit_message, :string
+  end
+end
+
+defmodule Decto.Commit do
+  use Ecto.Schema
+
+  @primary_key {:commit_hash, :string, autogenerate: :false}
+  schema "dolt_log" do
+    field :committer, :string
+    field :email, :string
+    field :date, :utc_datetime
+    field :message, :string
+  end
+
+end
+
 
 defmodule Decto.App do
   # Decto.Repo.start_link()
