@@ -63,6 +63,15 @@ defmodule Decto.Commit do
 
 end
 
+defmodule Decto.Diff do
+  alias Decto.{Repo}
+
+  def diff_table_between_branches(table, branch1, branch2) do
+    Repo.query!("SELECT * FROM dolt_commit_diff_#{table} where from_commit=HASHOF('#{branch1}') and to_commit = HASHOF('#{branch2}')")
+  end
+
+end
+
 defmodule Decto.App do
   # Decto.Repo.start_link()
   alias Decto.{Repo, Person}
